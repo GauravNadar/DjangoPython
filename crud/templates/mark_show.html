@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rango</title>
+    </head>
+
+    <body>
+        <h1>{{ st_id }}</h1>
+        {% if student %}
+            {% if marks %}
+            <ul>
+                {% for mark in marks %}
+                <li>{{ mark.science }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <strong>No pages currently in category.</strong>
+            {% endif %}
+        {% else %}
+            The specified category {{ st_id }} does not exist!
+        {% endif %}
+    </body>
+</html>
+

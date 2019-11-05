@@ -1,0 +1,33 @@
+<html>
+
+<head>Marks</head>
+<body><h1>{{st_id}}</h1>
+
+
+
+{% if student %}
+   
+    {% if marks %}
+
+   		{ % for mark in marks % }
+           
+           <p>{{ mark.science }}</p>
+
+        { % endfor %}
+
+    {% else %}
+    
+      <strong> no marks</strong>
+
+    {% endif %}
+
+
+{ % else % }
+
+   <p>no category</p> 
+
+{ % endif % }    
+
+</body>
+
+</html>

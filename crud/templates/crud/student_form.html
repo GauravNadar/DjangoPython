@@ -1,0 +1,65 @@
+{% extends 'crud/base.html' %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+
+
+</head>
+<body>
+{% block content %}
+
+<h1>Student Details</h1>
+<td><a href="{% url 'add' %}">Add</a></td><br>
+<td><a href="{% url 'search_item' %}">Search</a></td>
+<table border="1" class="table">
+<thead>
+    <tr class="info">
+    <th>Student Id</th>
+    <th>Name</th>
+    <th>Roll_no</th>
+    <th>Gender</th>
+    <th>Action</th>
+    </tr>
+</thead>
+<tbody>
+    {% for stud in object_list %}
+    <tr class="success">
+    <td>{{ stud.student_id }}</td>
+    <td>{{ stud.name }}</td>
+    <td>{{ stud.roll_no }}</td>
+    <td>{{ stud.gender }}</td>
+    <td><a href="{% url 'remove'  stud.student_id %}">Delete</td>
+    <td><a href="{% url 'edit'  stud.student_id %}">Edit</td>    
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+
+<footer class="text-muted">Created by Gaurav Nadar</footer>
+
+{% endblock content %}
+
+
+</body>
+</html>
