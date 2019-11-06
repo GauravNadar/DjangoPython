@@ -21,6 +21,8 @@ from . forms import LoginForm
 
 from django.views.generic.edit import FormView
 
+from django.contrib.auth.models import User
+
 class HomePage(ListView):
 	"""docstring for HomePage"""
 	model = Student
@@ -146,3 +148,14 @@ def getMarks(request, stud_id):
 		pass
 
 	return render_to_response('mark_show.html', context_dict, context)		
+
+
+
+
+def login(request):
+    m = Member.objects.get(username=request.POST['username'])
+    if m.password == request.POST['password']:
+        request.session['member_id'] = m.id
+        return HttpResponse("You're logged in.")
+    else:
+        return HttpResponse("Your username and password didn't match.")

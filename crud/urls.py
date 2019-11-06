@@ -12,6 +12,7 @@ from django.contrib.auth import views as auth_views
 
 from . import forms
 
+
 urlpatterns = [
 
 path('', views.HomePage.as_view(), name='home'),
@@ -32,5 +33,8 @@ path('search_item/', views.SearchItem.as_view(), name='search_item'),
 #path('login/', views.Loginclass.as_view(), name='login' )
 
 path('marks/<int:stud_id>', views.getMarks , name='marks' ),
+
+
+path('your-name/', views.login , name='log' ),
 
 ]
