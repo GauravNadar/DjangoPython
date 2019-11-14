@@ -23,6 +23,10 @@ from django.views.generic.edit import FormView
 
 from django.contrib.auth.models import User
 
+
+from .forms import AddForm, EditForm 
+
+
 class HomePage(ListView):
 	"""docstring for HomePage"""
 	model = Student
@@ -33,7 +37,8 @@ class HomePage(ListView):
 
 class StudentCreate(CreateView):
     model = Student
-    fields = ['name','roll_no', 'gender']
+    #fields = ['name', 'pic', 'roll_no', 'gender']
+    form_class = AddForm
     template_name = 'crud/student_create.html'
     success_url = reverse_lazy('create')
 
@@ -53,7 +58,8 @@ class StudentDelete(DeleteView):
 
 class StudentEdit(UpdateView):
     model = Student
-    fields = ['name', 'roll_no', 'gender']
+    form_class = EditForm
+   
     template_name = 'crud/student_edit.html'
     success_url = reverse_lazy('create')    
 
@@ -66,7 +72,7 @@ class SearchResultsView(ListView):
 
     def get_queryset(self): # new
         query = self.request.GET.get('q')
-        object_list = Marks.objects.filter(name__icontains=query
+        object_list = Student.objects.filter(name__icontains=query
            # Q(name__icontains=query) | Q(state__icontains=query)
         )
         return object_list
@@ -153,9 +159,18 @@ def getMarks(request, stud_id):
 
 
 def login(request):
-    m = Member.objects.get(username=request.POST['username'])
+    m = User.objects.get(username=request.POST['username'])
     if m.password == request.POST['password']:
         request.session['member_id'] = m.id
         return HttpResponse("You're logged in.")
     else:
         return HttpResponse("Your username and password didn't match.")
+
+
+
+
+class RegisterStudent(CreateView):
+	template_name = ""
+	form_class = UserCreationForm
+	success_url = reverse_lazy('')       
+

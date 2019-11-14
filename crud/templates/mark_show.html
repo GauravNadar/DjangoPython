@@ -7,14 +7,26 @@
     <body>
         <h1>{{ st_id }}</h1>
         {% if student %}
+
+   
+
+
+ <img src="{{ student.pic.url}}" alt="{{ student.name }}">
+
+                  
+
             {% if marks %}
             <ul>
                 {% for mark in marks %}
-                <li>{{ mark.science }}</li>
+                <li> Maths: {{ mark.maths }}</li>
+                 <li> Science: {{ mark.science }}</li>
+                  <li> English: {{ mark.english }}</li>
+               
+                   
                 {% endfor %}
             </ul>
             {% else %}
-                <strong>No pages currently in category.</strong>
+                <strong>Marks Not Added</strong>
             {% endif %}
         {% else %}
             The specified category {{ st_id }} does not exist!
